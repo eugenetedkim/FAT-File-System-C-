@@ -100,7 +100,7 @@ int FileSys::fsSynch()
 	ostringstream outStream;
 	for (int i = 0; i < fileName.size(); ++i)
 	{
-		outStream << std::left << setfill(' ') << setw(8) << fileName[i] << " " << std::left << setfill('0') << setw(3) << firstBlock[i] << " ";
+		outStream << std::left << setfill(' ') << setw(8) << fileName[i] << " " << std::left << setfill(' ') << setw(3) << firstBlock[i] << " ";
 	}
 	buffer = outStream.str();
 	vector<string> blocks = block(buffer, 13);
@@ -130,6 +130,11 @@ int FileSys::fsSynch()
 	}
 
 	return 1;
+}
+
+int FileSys::fsClose()
+{
+	fsSynch();
 }
 
 int FileSys::newFile(string file)
@@ -177,5 +182,89 @@ int FileSys::rmFile(string file)
 	cout << "File does not exist." << endl;
 	return 0;
 }
+
+int FileSys::getFirstBlock(string file)
+{
+	for (int i = 0; i < rootSize; i++)
+	{
+		if (fileName[i] == file)
+		{
+			return firstBlock[i];
+		}
+		else
+		{
+			cout << "No such file" << endl;
+			return 0;
+		}
+	}
+}
+
+int FileSys::addBlock(string file, string block)
+{
+	int first = getFirstBlock(file); // first = 0
+	if (first == -1)
+	{
+		return 0;
+	}
+
+	int allocate = fat[0]; // allocate = 11
+	if (allocate == 0) // No free block
+	{
+		return 0;
+	}
+
+	fat[0] = fat[fat[0]]; // fat[0] is now 12
+	fat[allocate] = 0; // fat[11] = 0;
+
+	if (first == 0) // Empty
+	{
+		for (int i = 0; i < rootSize; i++)
+		{
+			if (fileName[i] == file)
+			{
+				firstBlock[i] = allocate; // firstBlock[0] = 11;
+				fsSynch();
+				putBlock(allocate, block);
+				return allocate;
+			}
+		}
+	}
+	else // Not empty; 
+	{
+		int iBlock = first; // iBlock = 0;
+		while (fat[iBlock] != 0)  // while (12 != 0)
+		{
+			iBlock = fat[iBlock]; // iBlock = 12
+		}
+		fat[iBlock] = allocate;
+		putBlock(allocate, block);
+		return allocate;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -21,5 +21,8 @@ int main()
 	Sdisk disk1("disk1", 32, 16);
 	FileSys fileSystem("disk1", 32, 16);
 	fileSystem.newFile("dreams");
-	fileSystem.rmFile("dreams");
+
+	fileSystem.addBlock("dreams", "testing");
+	fileSystem.addBlock("dreams", "testing2");
+	fileSystem.addBlock("dreams", "testing3");
 }

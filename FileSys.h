@@ -33,12 +33,12 @@ private:
 public:
 	FileSys(string diskName, int numberOfBlocks, int blockSize);
 	int fsSynch();
+	int fsClose();
 	int newFile(string file);
 	int rmFile(string file);
-	/*
-	int fsClose();
 	int getFirstBlock(string file);
 	int addBlock(string file, string block);
+	/*
 	int delBlock(string file, int blockNumber);
 	int readBlock(string file, int blockNumber, string& buffer);
 	int writeBlock(string file, int blockNumber, string buffer);
