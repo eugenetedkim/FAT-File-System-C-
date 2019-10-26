@@ -201,42 +201,62 @@ int FileSys::getFirstBlock(string file)
 
 int FileSys::addBlock(string file, string block)
 {
-	int first = getFirstBlock(file); // first = 0
+	//                 adding  adding
+	//                 testing testing2
+	// fat[0]   [11] -> [12] -> [13] -> [14]
+	// fat[1]   [-1]    [-1]    [-1]    [-1]
+	// fat[2]   [-1]    [-1]    [-1]    [-1]
+	// fat[3]   [-1]    [-1]    [-1]    [-1]
+	// fat[4]   [-1]    [-1]    [-1]    [-1]
+	// fat[5]   [-1]    [-1]    [-1]    [-1]
+	// fat[6]   [-1]    [-1]    [-1]    [-1]
+	// fat[7]   [-1]    [-1]    [-1]    [-1]
+	// fat[8]   [-1]    [-1]    [-1]    [-1]
+	// fat[9]   [-1]    [-1]    [-1]    [-1]
+	// fat[10]  [-1]    [-1]    [-1]    [-1]
+	// fat[11]  [12] -> [0]     [12]    [12]
+	// fat[12]  [13]    [13] -> [0 ]    [13]
+	// fat[13]  [14]    [14]    [14] -> [0 ]
+	// fat[14]  [15]    [15]    [15]    [15]
+
+	int first = getFirstBlock(file);
 	if (first == -1)
 	{
 		return 0;
 	}
 
-	int allocate = fat[0]; // allocate = 11
-	if (allocate == 0) // No free block
+	int allocate = fat[0];
+	if (allocate == 0)
 	{
 		return 0;
 	}
 
-	fat[0] = fat[fat[0]]; // fat[0] is now 12
-	fat[allocate] = 0; // fat[11] = 0;
+	fat[0] = fat[fat[0]];
+	fat[allocate] = 0;
 
-	if (first == 0) // Empty
+	if (first == 0)
 	{
 		for (int i = 0; i < rootSize; i++)
 		{
 			if (fileName[i] == file)
 			{
-				firstBlock[i] = allocate; // firstBlock[0] = 11;
+				firstBlock[i] = allocate;
 				fsSynch();
 				putBlock(allocate, block);
 				return allocate;
 			}
 		}
 	}
-	else // Not empty; 
+	else
 	{
-		int iBlock = first; // iBlock = 0;
-		while (fat[iBlock] != 0)  // while (12 != 0)
+		int iBlock = first;
+		while (fat[iBlock] != 0)
 		{
-			iBlock = fat[iBlock]; // iBlock = 12
+			iBlock = fat[iBlock];
 		}
+
 		fat[iBlock] = allocate;
+		fsSynch();
 		putBlock(allocate, block);
 		return allocate;
 	}
