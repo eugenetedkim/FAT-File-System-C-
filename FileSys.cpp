@@ -86,10 +86,6 @@ FileSys::FileSys(string diskName, int numberOfBlocks, int blockSize): Sdisk(disk
 			fat.push_back(toInt);
 		}
 	}
-	for (int i = 0; i < fat.size(); ++i)
-	{
-		cout << fat[i] << endl;
-	}
 	fsSynch();
 }
 
@@ -254,8 +250,8 @@ int FileSys::addBlock(string file, string block)
 		{
 			iBlock = fat[iBlock];
 		}
-
 		fat[iBlock] = allocate;
+		fat[allocate] = 0;
 		fsSynch();
 		putBlock(allocate, block);
 		return allocate;
@@ -263,9 +259,116 @@ int FileSys::addBlock(string file, string block)
 }
 
 
+int FileSys::checkBlock(string file, int blockNumber)
+{
+	int iBlock = getFirstBlock(file);
+	while(iBlock != 0)
+	{
+		if (iBlock == blockNumber)
+		{
+			return true;
+		}
+		iBlock = fat[iBlock];
+	}
+	return false;
+}
 
+int FileSys::delBlock(string file, int blockNumber)
+{
+	if (!checkBlock(file, blockNumber))
+	{
+		return 0;
+	}
 
+	int deAllocate = blockNumber;
 
+	if (blockNumber == getFirstBlock(file))
+	{
+		for (int i = 0; i < fileName.size(); i++)
+		{
+			if (file == fileName[i])
+			{
+				firstBlock[i] = fat[blockNumber];
+				break;
+			}
+		}
+		fat[deAllocate] = fat[0];
+		fat[0] = deAllocate;
+		string hashTags;
+		for (int i = 0; i < getBlockSize(); i++)
+		{
+			hashTags = hashTags + '#'; 
+		}
+		putBlock(deAllocate, hashTags);
+		fsSynch();
+	}
+	else
+	{
+		int iBlock = getFirstBlock(file);
+		while (fat[iBlock] != blockNumber)
+		{
+			iBlock = fat[iBlock];
+		}
+		// fat[iBlock] == blockNumber
+		fat[iBlock] = fat[blockNumber];
+		fat[deAllocate] = fat[0];
+		fat[0] = deAllocate;
+		string hashTags;
+		for (int i = 0; i < getBlockSize(); i++)
+		{
+			hashTags = hashTags + '#'; 
+		}
+		putBlock(deAllocate, hashTags);
+		fsSynch();
+	}
+}
+
+int FileSys::readBlock(string file, int blockNumber, string& buffer)
+{
+	if (checkBlock(file, blockNumber))
+	{
+		getBlock(blockNumber, buffer);
+		cout << "Block number " << blockNumber << " contains " << '"'<< buffer << '"' << endl;
+		return 1;
+	}
+	else
+	{
+		cout << "No such block number in " << file << endl;
+		return 0;
+	}
+}
+
+int FileSys::writeBlock(string file, int blockNumber, string buffer)
+{
+	if (checkBlock(file, blockNumber))
+	{
+		string hashTags;
+		for (int i = 0; i < getBlockSize(); i++)
+		{
+			hashTags = hashTags + '#'; 
+		}
+		putBlock(blockNumber, hashTags);
+		putBlock(blockNumber, buffer);
+		fsSynch();
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+int FileSys::nextBlock(string file, int blockNumber)
+{
+	if (checkBlock(file, blockNumber))
+	{
+		return fat[blockNumber];
+	}
+	else
+	{
+		return -1;
+	}
+}
 
 
 

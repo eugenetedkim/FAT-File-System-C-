@@ -38,12 +38,11 @@ public:
 	int rmFile(string file);
 	int getFirstBlock(string file);
 	int addBlock(string file, string block);
-	/*
 	int delBlock(string file, int blockNumber);
+	int checkBlock(string file, int blockNumber);
 	int readBlock(string file, int blockNumber, string& buffer);
 	int writeBlock(string file, int blockNumber, string buffer);
 	int nextBlock(string file, int blockNumber);
-	*/
 };
 
 #endif
