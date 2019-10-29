@@ -43,6 +43,7 @@ public:
 	int readBlock(string file, int blockNumber, string& buffer);
 	int writeBlock(string file, int blockNumber, string buffer);
 	int nextBlock(string file, int blockNumber);
+	vector<string> block(string s, int b);
 };
 
 #endif

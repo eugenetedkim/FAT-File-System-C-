@@ -79,6 +79,7 @@ int Sdisk::putBlock(int blockNumber, string buffer)
 			outFile.put(buffer[i]);
 		}
 		outFile.close();
+		buffer.clear();
 		return 1;
 	}
 	else

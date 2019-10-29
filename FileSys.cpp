@@ -85,8 +85,52 @@ FileSys::FileSys(string diskName, int numberOfBlocks, int blockSize): Sdisk(disk
 			inStream2 >> toInt;
 			fat.push_back(toInt);
 		}
+		fsSynch();
 	}
 	fsSynch();
+}
+
+vector<string> FileSys::block(string s, int b)
+{
+	// s IS buffer
+	// b IS blockSize, A PRIVATE DATA MEMBER
+	// RETURNS A VECTOR OF STRING(S)
+	// EACH STRING HAS b BYTES
+
+	vector<string> blocks;
+	int numberOfBlocks = 0; // numberOfBlocks IS A PRIVATE DATA MEMBER
+
+
+	// SETS numberOfBlocks ACCORDING TO THE BUFFER SIZE OF, s,
+	// THAT HAS BEEN PASSED-IN AS A PARAMETER
+	if(s.size() % b == 0)
+	{
+		numberOfBlocks = s.size() / b;
+	}
+	else
+	{
+		numberOfBlocks = s.size() / b + 1;
+	}
+
+	// AFTER SETTING numberOfBlocks, THIS LOOP SETS EACH BLOCK WITH
+	// A STRING FROM THE BUFFER
+	for (int i = 0; i < numberOfBlocks; i++)
+	{
+		// b * i EQUALS A POSITION THAT BEGINS AT ONE BLOCK.
+		// b IS THE BLOCKSIZE OR NUMBER OF BYTES OR NUMBER OF CHARACTERS
+		// AS i ITERATES UP, EACH BLOCK WILL HAVE A SUB-STRING.
+		blocks.push_back(s.substr(b * i, b));
+	}
+
+	int lastBlock = blocks.size() - 1;
+	for (int i = blocks[lastBlock].length(); i < b; i++)
+	{
+		// APPENDS/CONCATENATES "#" TO THE END OF THE STRING
+		// CONTAINED IN THE LAST INDEX OF THE VECTOR OF STRINGS, blocks.
+		blocks[lastBlock] += "#";
+	}
+
+	return blocks;
 }
 
 int FileSys::fsSynch()
@@ -131,6 +175,7 @@ int FileSys::fsSynch()
 int FileSys::fsClose()
 {
 	fsSynch();
+	return 1;
 }
 
 int FileSys::newFile(string file)
@@ -181,40 +226,19 @@ int FileSys::rmFile(string file)
 
 int FileSys::getFirstBlock(string file)
 {
-	for (int i = 0; i < rootSize; i++)
+	for (int i = 0; i < fileName.size(); ++i)
 	{
 		if (fileName[i] == file)
 		{
 			return firstBlock[i];
 		}
-		else
-		{
-			cout << "No such file" << endl;
-			return 0;
-		}
 	}
+	cout << "No such file" << endl;
+	return 0;
 }
 
 int FileSys::addBlock(string file, string block)
 {
-	//                 adding  adding
-	//                 testing testing2
-	// fat[0]   [11] -> [12] -> [13] -> [14]
-	// fat[1]   [-1]    [-1]    [-1]    [-1]
-	// fat[2]   [-1]    [-1]    [-1]    [-1]
-	// fat[3]   [-1]    [-1]    [-1]    [-1]
-	// fat[4]   [-1]    [-1]    [-1]    [-1]
-	// fat[5]   [-1]    [-1]    [-1]    [-1]
-	// fat[6]   [-1]    [-1]    [-1]    [-1]
-	// fat[7]   [-1]    [-1]    [-1]    [-1]
-	// fat[8]   [-1]    [-1]    [-1]    [-1]
-	// fat[9]   [-1]    [-1]    [-1]    [-1]
-	// fat[10]  [-1]    [-1]    [-1]    [-1]
-	// fat[11]  [12] -> [0]     [12]    [12]
-	// fat[12]  [13]    [13] -> [0 ]    [13]
-	// fat[13]  [14]    [14]    [14] -> [0 ]
-	// fat[14]  [15]    [15]    [15]    [15]
-
 	int first = getFirstBlock(file);
 	if (first == -1)
 	{
@@ -251,11 +275,15 @@ int FileSys::addBlock(string file, string block)
 			iBlock = fat[iBlock];
 		}
 		fat[iBlock] = allocate;
-		fat[allocate] = 0;
 		fsSynch();
 		putBlock(allocate, block);
+		for (int i = 0; i < fat.size(); i++)
+		{
+			cout << fat[i] << endl;
+		}
 		return allocate;
 	}
+	fsSynch();
 }
 
 
@@ -369,6 +397,7 @@ int FileSys::nextBlock(string file, int blockNumber)
 		return -1;
 	}
 }
+
 
 
 

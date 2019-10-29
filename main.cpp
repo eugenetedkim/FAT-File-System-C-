@@ -16,20 +16,46 @@
 
 using namespace std;
 
+// You can use this to test your Filesys class 
+
 int main()
 {
-	string buffer;
-	Sdisk disk1("disk1", 32, 16);
-	FileSys fileSystem("disk1", 32, 16);
-	fileSystem.newFile("dreams");
-	fileSystem.addBlock("dreams", "testing");
-	fileSystem.addBlock("dreams", "testing2");
-	fileSystem.addBlock("dreams", "testing3");
-	fileSystem.addBlock("dreams", "testing4");
-	fileSystem.delBlock("dreams", 11);
-	fileSystem.readBlock("dreams", 14, buffer);
-	fileSystem.addBlock("dreams", "testing1");
-	fileSystem.writeBlock("dreams", 11, "test");
-	int nextBlockNumber = fileSystem.nextBlock("dreams", 12);
-	cout << nextBlockNumber << endl;
+  	Sdisk disk1("disk1", 256, 128);
+  	FileSys fsys("disk1", 256, 128);
+  	fsys.newFile("file1");
+	fsys.newFile("file2");
+
+	string bfile1;
+	string bfile2;
+
+  	for (int i = 1; i <= 1024; i++)
+    {
+    	bfile1 += "1";
+    }
+
+  	vector<string> blocks = fsys.block(bfile1, 128);
+
+	int blockNumber = 0;
+
+  	for (int i = 0; i < blocks.size(); i++)
+    {
+    	blockNumber = fsys.addBlock("file1", blocks[i]);
+    }
+
+	fsys.delBlock("file1", fsys.getFirstBlock("file1"));
+
+
+  	for (int i = 1; i <= 2048; i++)
+    {
+    	bfile2 += "2";
+    }
+
+	blocks = fsys.block(bfile2, 128);
+
+  	for (int i = 0; i < blocks.size(); i++)
+    {
+    	blockNumber = fsys.addBlock("file2", blocks[i]);
+    }
+ 
+  	fsys.delBlock("file2", blockNumber);
 }
