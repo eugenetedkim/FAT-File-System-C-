@@ -277,10 +277,6 @@ int FileSys::addBlock(string file, string block)
 		fat[iBlock] = allocate;
 		fsSynch();
 		putBlock(allocate, block);
-		for (int i = 0; i < fat.size(); i++)
-		{
-			cout << fat[i] << endl;
-		}
 		return allocate;
 	}
 	fsSynch();
