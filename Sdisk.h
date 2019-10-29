@@ -3,9 +3,9 @@
 * Quarter: Fall 2019
 * Course: CSE 461 Advanced Operating Systems
 * Professor: Owen Murphy
-* Assignment: Lab 3
+* Assignment: Labs 3 & 4
 * Assigned: October 8, 2019
-* Due: October 22, 2019
+* Due: October 29, 2019
 * File Name: Sdisk.h
 * Description: This file defines the class interface
 *************************************************************/
