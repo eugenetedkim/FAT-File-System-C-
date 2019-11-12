@@ -9,7 +9,6 @@
 * File Name: Sdisk.cpp
 * Description: This file defines the class member functions
 *************************************************************/
-
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -131,13 +130,6 @@ vector<string> Sdisk::block(string s, int b)
 		blocks.push_back(s.substr(b * i, b));
 	}
 
-	int lastBlock = blocks.size() - 1;
-	for (int i = blocks[lastBlock].length(); i < b; i++)
-	{
-		// APPENDS/CONCATENATES "#" TO THE END OF THE STRING
-		// CONTAINED IN THE LAST INDEX OF THE VECTOR OF STRINGS, blocks.
-		blocks[lastBlock] += "#";
-	}
 
 	return blocks;
 }

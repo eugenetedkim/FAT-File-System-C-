@@ -3,13 +3,12 @@
 * Quarter: Fall 2019
 * Course: CSE 461 Advanced Operating Systems
 * Professor: Owen Murphy
-* Assignment: Lab 3
-* Assigned: October 8, 2019
-* Due: October 22, 2019
+* Assignment: Lab 5
+* Assigned: November 5, 2019
+* Due: November 12, 2019
 * File Name: FileSys.h
-* Description: This file defines the class interface
+* Description: 
 *************************************************************/
-
 #ifndef FILESYS_H
 #define FILESYS_H
 
@@ -44,6 +43,8 @@ public:
 	int writeBlock(string file, int blockNumber, string buffer);
 	int nextBlock(string file, int blockNumber);
 	vector<string> block(string s, int b);
+	vector<string> ls();
+
 };
 
 #endif

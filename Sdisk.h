@@ -9,7 +9,6 @@
 * File Name: Sdisk.h
 * Description: This file defines the class interface
 *************************************************************/
-
 #include <cstdlib>
 #include <iostream>
 #include <cstring>

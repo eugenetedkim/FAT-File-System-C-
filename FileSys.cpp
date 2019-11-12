@@ -3,13 +3,12 @@
 * Quarter: Fall 2019
 * Course: CSE 461 Advanced Operating Systems
 * Professor: Owen Murphy
-* Assignment: Lab 3
-* Assigned: October 8, 2019
-* Due: October 22, 2019
+* Assignment: Lab 5
+* Assigned: November 5, 2019
+* Due: November 12, 2019
 * File Name: FileSys.cpp
-* Description: This file defines the class member functions
+* Description: 
 *************************************************************/
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -122,14 +121,6 @@ vector<string> FileSys::block(string s, int b)
 		blocks.push_back(s.substr(b * i, b));
 	}
 
-	int lastBlock = blocks.size() - 1;
-	for (int i = blocks[lastBlock].length(); i < b; i++)
-	{
-		// APPENDS/CONCATENATES "#" TO THE END OF THE STRING
-		// CONTAINED IN THE LAST INDEX OF THE VECTOR OF STRINGS, blocks.
-		blocks[lastBlock] += "#";
-	}
-
 	return blocks;
 }
 
@@ -149,6 +140,7 @@ int FileSys::fsSynch()
 	{
 		buffer = buffer + blocks[i];
 	}
+
 	blocks.clear();
 	putBlock(1, buffer);
 	buffer.clear();
@@ -280,6 +272,7 @@ int FileSys::addBlock(string file, string block)
 		return allocate;
 	}
 	fsSynch();
+	return 1;
 }
 
 
@@ -325,6 +318,7 @@ int FileSys::delBlock(string file, int blockNumber)
 		}
 		putBlock(deAllocate, hashTags);
 		fsSynch();
+		return 1;
 	}
 	else
 	{
@@ -344,7 +338,9 @@ int FileSys::delBlock(string file, int blockNumber)
 		}
 		putBlock(deAllocate, hashTags);
 		fsSynch();
+		return 1;
 	}
+	return 0;
 }
 
 int FileSys::readBlock(string file, int blockNumber, string& buffer)
@@ -352,7 +348,6 @@ int FileSys::readBlock(string file, int blockNumber, string& buffer)
 	if (checkBlock(file, blockNumber))
 	{
 		getBlock(blockNumber, buffer);
-		cout << "Block number " << blockNumber << " contains " << '"'<< buffer << '"' << endl;
 		return 1;
 	}
 	else
@@ -394,7 +389,20 @@ int FileSys::nextBlock(string file, int blockNumber)
 	}
 }
 
-
+// This function is part of the FileSys class
+// Prototype: vector<string> ls();
+vector<string> FileSys::ls()
+{
+	vector<string> fList;
+	for (int i = 0; i < fileName.size(); i++)
+	{
+		if (fileName[i] != "XXXXXXXX")
+		{
+			fList.push_back(fileName[i]);
+		}
+	}
+	return fList;
+}
 
 
 

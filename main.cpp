@@ -3,16 +3,17 @@
 * Quarter: Fall 2019
 * Course: CSE 461 Advanced Operating Systems
 * Professor: Owen Murphy
-* Assignment: Labs 3 & 4
-* Assigned: October 8, 2019
-* Due: October 29, 2019
+* Assignment: Lab 6
+* Assigned: November 5, 2019
+* Due: November 12, 2019
 * File Name: main.cpp
-* Description: This program creates a file system
+* Description: 
 *************************************************************/
 #include <iostream>
 
 #include "Sdisk.h"
 #include "FileSys.h"
+#include "Shell.h"
 
 using namespace std;
 
@@ -20,42 +21,76 @@ using namespace std;
 
 int main()
 {
-  	Sdisk disk1("disk1", 256, 128);
-  	FileSys fsys("disk1", 256, 128);
-  	fsys.newFile("file1");
-	fsys.newFile("file2");
+  Sdisk disk1("disk1", 256, 128);
+  FileSys fSys("disk1", 256, 128);
 
-	string bfile1;
-	string bfile2;
+  //
+  // This main program inputs commands to the shell.
+  // It inputs commands as : command op1 op2
+  // You should modify it to work for your implementation.
+  //
 
-  	for (int i = 1; i <= 1024; i++)
+  string s;
+  string command = "go";
+  string op1, op2;
+  Shell shell("disk1", 256, 128);
+
+  while (command != "quit")
+  {
+    command.clear();
+    s.clear(); // Why isn't this in here? All other strings get cleared but string s doesn't. Couldn't there be garbage?
+    op1.clear();
+    op2.clear();
+    cout << "$ ";
+    getline(cin, s);
+    int firstBlank = s.find(' ');
+    if (firstBlank < s.length())
     {
-    	bfile1 += "1";
+      s[firstBlank] = '#';
+    }
+    int secondBlank = s.find(' ');
+    command = s.substr(0, firstBlank);
+
+    if (firstBlank < s.length())
+    {
+      op1 = s.substr(firstBlank + 1, secondBlank - firstBlank - 1);
     }
 
-  	vector<string> blocks = fsys.block(bfile1, 128);
-
-	int blockNumber = 0;
-
-  	for (int i = 0; i < blocks.size(); i++)
+    if (secondBlank < s.length())
     {
-    	blockNumber = fsys.addBlock("file1", blocks[i]);
+      op2 = s.substr(secondBlank + 1);
     }
 
-	fsys.delBlock("file1", fsys.getFirstBlock("file1"));
-
-
-  	for (int i = 1; i <= 2048; i++)
+    if (command == "dir")
     {
-    	bfile2 += "2";
+      shell.dir();
     }
 
-	blocks = fsys.block(bfile2, 128);
-
-  	for (int i = 0; i < blocks.size(); i++)
+    if (command == "add")
     {
-    	blockNumber = fsys.addBlock("file2", blocks[i]);
+      // The variable op1 is the new file
+      shell.add(op1);
+    }
+
+    if (command == "del")
+    {
+      // The variable op1 is the file
+      shell.del(op1);
     }
  
-  	fsys.delBlock("file2", blockNumber);
+    if (command == "type")
+    {
+      // The variable op1 is the file
+      shell.type(op1);
+    }
+
+    if (command == "copy")
+    {
+      // The variable op1 is the source file and the variable op2 is the destination file.
+      shell.copy(op1, op2);
+    }
+
+  }
+
+  return 0;
 }
