@@ -96,6 +96,11 @@ int Shell::copy(string file1, string file2)
 
   int code2 = getFirstBlock(file2);
 
+  if (code2 == 0)
+  {
+    cout << file2 << " has been created with contents of " << file1 << endl;
+  }
+
   if (code2 != 0)
   {
     cout << "File 2 exists" << endl;
