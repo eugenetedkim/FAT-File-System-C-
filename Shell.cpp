@@ -41,9 +41,9 @@ int Shell::add(string file) // add a new file using input from the keyboard
 
   int code1 = newFile(file);
 
-  if ( code1 == 0)
+  if (code1 == -1)
   {
-    cout << "File already exists" << endl;
+    cout << "Not enough room on disk" << endl;
     return 0;
   }
   else
@@ -98,12 +98,12 @@ int Shell::copy(string file1, string file2)
 
   if (code2 == 0)
   {
-    cout << file2 << " has been created with contents of " << file1 << endl;
+    cout << "...therefore, " << file2 << " has been created with contents of " << file1 << endl;
   }
 
   if (code2 != 0)
   {
-    cout << "File 2 exists" << endl;
+    cout << file2 << " exists and its contents will not be overwritten" << endl;
     return 0;
   }
 

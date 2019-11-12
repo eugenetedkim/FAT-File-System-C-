@@ -190,7 +190,7 @@ int FileSys::newFile(string file)
 			return 1;
 		}
 	}
-	return 0;
+	return -1;
 }
 
 int FileSys::rmFile(string file)
