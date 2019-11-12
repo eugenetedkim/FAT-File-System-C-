@@ -1,15 +1,3 @@
-/*************************************************************
-* Programmer: Eugene Kim
-* Quarter: Fall 2019
-* Course: CSE 461 Advanced Operating Systems
-* Professor: Owen Murphy
-* Assignment: Lab 6
-* Assigned: November 5, 2019
-* Due: November 12, 2019
-* File Name: Shell.make
-* Description: This make file allows testing and compilation
-* to be more convenient
-*************************************************************/
 Shell: main.o Sdisk.o FileSys.o Shell.o
 	g++ main.o Sdisk.o FileSys.o Shell.o -o Shell
 
