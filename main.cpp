@@ -7,7 +7,18 @@
 * Assigned: November 5, 2019
 * Due: November 12, 2019
 * File Name: main.cpp
-* Description: 
+* Description: This main program creates an interactive shell,
+* a file system, and a software disk which data is stored.
+
+* Users can interact with the shell 
+* using the following commands:
+
+* $ dir - List all directories in the file system
+* $ add [directory name] - Add a new directory
+* $ del [directory name] - Delete a directory
+* $ type [directory name] - Display the contents of a directory
+* $ copy [directory name 1] [directory name 2] - Copy content of 
+* directory 1 to a new directory name 2
 *************************************************************/
 #include <iostream>
 
