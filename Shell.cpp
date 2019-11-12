@@ -43,7 +43,7 @@ int Shell::add(string file) // add a new file using input from the keyboard
 
   if (code1 == -1)
   {
-    cout << "Not enough room on disk" << endl;
+    cout << "No space in the ROOT directory" << endl;
     return 0;
   }
   else
@@ -90,7 +90,7 @@ int Shell::copy(string file1, string file2)
 
   if (code  == -1)
   {
-    cout << "File does not exist" << endl;
+    cout << file2 << " does not exist" << endl;
     return 0;
   }
 
@@ -109,7 +109,7 @@ int Shell::copy(string file1, string file2)
 
   int code3 = newFile(file2);
 
-  if (code3 == 0) 
+  if (code3 == -1) 
   {
     cout << "No space in the ROOT directory" << endl;
     return 0;
