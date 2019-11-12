@@ -225,7 +225,6 @@ int FileSys::getFirstBlock(string file)
 			return firstBlock[i];
 		}
 	}
-	cout << "No such file" << endl;
 	return 0;
 }
 
