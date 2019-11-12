@@ -7,7 +7,8 @@
 * Assigned: November 5, 2019
 * Due: November 12, 2019
 * File Name: FileSys.cpp
-* Description: 
+* Description: This is the file system implementation which 
+* calls the software disk's public member functions
 *************************************************************/
 #include <iostream>
 #include <string>

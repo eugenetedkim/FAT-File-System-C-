@@ -7,7 +7,8 @@
 * Assigned: November 5, 2019
 * Due: November 12, 2019
 * File Name: Shell.cpp
-* Description: 
+* Description: This is the shell implementation which calls
+* the filesystem's public member functions
 *************************************************************/
 #include <iostream>
 #include <string>

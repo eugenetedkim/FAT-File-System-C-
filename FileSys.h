@@ -7,7 +7,8 @@
 * Assigned: November 5, 2019
 * Due: November 12, 2019
 * File Name: FileSys.h
-* Description: 
+* Description: This is the file system interface that connects
+* the file system with the underlying software disk
 *************************************************************/
 #ifndef FILESYS_H
 #define FILESYS_H

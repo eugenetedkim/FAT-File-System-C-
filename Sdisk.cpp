@@ -7,7 +7,9 @@
 * Assigned: October 8, 2019
 * Due: October 29, 2019
 * File Name: Sdisk.cpp
-* Description: This file defines the class member functions
+* Description: This is the software disk implementation
+* which calls the input/output stream's public member 
+* functions
 *************************************************************/
 #include <cstdlib>
 #include <iostream>

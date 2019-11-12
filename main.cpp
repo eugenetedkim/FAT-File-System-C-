@@ -9,10 +9,10 @@
 * File Name: main.cpp
 * Description: This main program creates an interactive shell,
 * a file system, and a software disk which data is stored.
-
-* Users can interact with the shell 
-* using the following commands:
-
+*
+* Users can organize and store data using this program
+* by using the following commands:
+*
 * $ dir - List all directories in the file system
 * $ add [directory name] - Add a new directory
 * $ del [directory name] - Delete a directory

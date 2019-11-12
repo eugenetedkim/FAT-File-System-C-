@@ -7,7 +7,8 @@
 * Assigned: October 8, 2019
 * Due: October 29, 2019
 * File Name: Sdisk.h
-* Description: This file defines the class interface
+* Description: This is the software disk interface which
+* connects the software disk to the underlying .txt file
 *************************************************************/
 #include <cstdlib>
 #include <iostream>

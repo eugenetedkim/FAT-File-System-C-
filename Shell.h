@@ -7,7 +7,8 @@
 * Assigned: November 5, 2019
 * Due: November 12, 2019
 * File Name: Shell.h
-* Description: 
+* Description: This is the shell interface that connects the
+* interactive shell with the underlying file system
 *************************************************************/
 #include <iostream>
 #include <string>
