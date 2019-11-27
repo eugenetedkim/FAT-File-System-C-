@@ -27,7 +27,6 @@ Shell::Shell(string fileName, int blockSize, int numberOfBlocks)
 // dir lists files in the class Shell
 int Shell::dir() // lists all files
 {
-  cout << "calling dir";
   vector<string> fList = ls();
 
   for (int i = 0; i < fList.size(); i++)

@@ -151,7 +151,7 @@ int FileSys::fsSynch()
 	ostringstream outStream2;
 	for (int i = 0; i < fat.size(); i++)
 	{
-		//outStream2 <<  std::left << setfill(' ') << setw(3) << fat[i] << " ";
+		//outStream2 << std::left << setfill(' ') << setw(3) << fat[i] << " ";
 		outStream2 << fat[i] << " ";
 	}
 	buffer = outStream2.str();
@@ -395,36 +395,13 @@ int FileSys::nextBlock(string file, int blockNumber)
 // Prototype: vector<string> ls();
 vector<string> FileSys::ls()
 {
-	cout << "isn't even...";
 	vector<string> fList;
 	for (int i = 0; i < fileName.size(); i++)
 	{
 		if (fileName[i] != "xxxxxxxx")
 		{
-			cout << fileName[i].size() << endl;
 			fList.push_back(fileName[i]);
 		}
 	}
 	return fList;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
