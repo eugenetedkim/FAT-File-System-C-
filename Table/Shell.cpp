@@ -3,9 +3,9 @@
 * Quarter: Fall 2019
 * Course: CSE 461 Advanced Operating Systems
 * Professor: Owen Murphy
-* Assignment: Lab 6
-* Assigned: November 5, 2019
-* Due: November 12, 2019
+* Assignment: Lab 7 / Lab 8 / Homework 4 / Project 4
+* Assigned: November 19, 2019
+* Due: December 3, 2019
 * File Name: Shell.cpp
 * Description: This is the shell implementation which calls
 * the filesystem's public member functions

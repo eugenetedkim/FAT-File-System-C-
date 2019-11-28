@@ -1,3 +1,15 @@
+/*************************************************************
+* Programmer: Eugene Kim
+* Quarter: Fall 2019
+* Course: CSE 461 Advanced Operating Systems
+* Professor: Owen Murphy
+* Assignment: Lab 7 / Lab 8 / Homework 4 / Project 4
+* Assigned: November 19, 2019
+* Due: December 3, 2019
+* File Name: Table.cpp
+* Description:
+*************************************************************/
+
 #include <iostream>
 #include <string>
 #include <fstream>
