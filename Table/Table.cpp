@@ -20,24 +20,6 @@
 using namespace std;
 
 /*
-	USE FileSys MEMBER FUNCTIONS!!!!!!
-	FileSys(string diskName, int numberOfBlocks, int blockSize);
-	int fsSynch();
-	int fsClose();
-	int newFile(string file);
-	int rmFile(string file);
-	int getFirstBlock(string file);
-	int addBlock(string file, string block);
-	int delBlock(string file, int blockNumber);
-	int checkBlock(string file, int blockNumber);
-	int readBlock(string file, int blockNumber, string& buffer);
-	int writeBlock(string file, int blockNumber, string buffer);
-	int nextBlock(string file, int blockNumber);
-	vector<string> block(string s, int b);
-	vector<string> ls();
-*/
-
-/*
 	This constructor creates the table object.
 	It creates 2 new files (flatFile and indexFile) in the file system on the Sdisk using diskName.
 */
@@ -124,4 +106,5 @@ int Table::search(string value)
 	string buffer;
 	readBlock(flatFile, b, buffer);
 	cout << buffer << endl;
+	return 1;
 }

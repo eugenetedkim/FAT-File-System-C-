@@ -10,6 +10,7 @@
 * Description: This is the shell implementation which calls
 * the filesystem's public member functions
 *************************************************************/
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -24,8 +25,7 @@ Shell::Shell(string fileName, int blockSize, int numberOfBlocks)
 {
 }
 
-// dir lists files in the class Shell
-int Shell::dir() // lists all files
+int Shell::dir()
 {
   vector<string> fList = ls();
 
@@ -36,7 +36,7 @@ int Shell::dir() // lists all files
   return 0;
 }
 
-int Shell::add(string file) // add a new file using input from the keyboard
+int Shell::add(string file)
 {
   string input;
 
@@ -57,7 +57,7 @@ int Shell::add(string file) // add a new file using input from the keyboard
   return 1;
 }
 
-int Shell::del(string file) // deletes the files
+int Shell::del(string file)
 {
 
   while (getFirstBlock(file) != 0)
@@ -70,7 +70,7 @@ int Shell::del(string file) // deletes the files
   return 1;
 }
 
-int Shell::type(string file) // lists the content of file
+int Shell::type(string file)
 {
   string buffer;
   int first = getFirstBlock(file);
@@ -111,7 +111,7 @@ int Shell::copy(string file1, string file2)
     return 0;
   }
 
-  int iBlock = code; // iBlock is the first block in the file
+  int iBlock = code;
 
   while (iBlock != 0)
   {

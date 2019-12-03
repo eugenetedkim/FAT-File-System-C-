@@ -7,7 +7,11 @@
 * Assigned: November 19, 2019
 * Due: December 3, 2019
 * File Name: main.cpp
-* Description:
+* Description: This program allows the user to open a flat
+* file (data.txt in our case) and store it on a file system
+* which is stored on a software disk. The user is able to 
+* enter commands in a shell program to view, add, or delete
+* the file.
 *************************************************************/
 
 #include <iostream>
@@ -22,19 +26,11 @@ using namespace std;
 
 int main()
 {
-	/*
-		This main program inputs commands to the shell.
-		It inputs commands as : command op1 op2
-		You should modify it to work for your implementation.
-	*/
-
-	Sdisk sDisk = Sdisk("sDisk.txt", 256, 128); // Creates the software disk  of chars using hash tags
-	FileSys fSys = FileSys("sDisk.txt", 256, 128); // Creates a file system on the software disk
-	//Table table = Table("sDisk.txt", 256, 128, "flat", "index"); // 
+	Sdisk sDisk = Sdisk("sDisk.txt", 256, 128);
+	FileSys fSys = FileSys("sDisk.txt", 256, 128);
 	Table table = Table("sDisk.txt", 256, 128);
 	table.buildTable("data.txt");
-	Shell shell = Shell("sDisk.txt", 256, 128); // Creates a shell to access the file system
-
+	Shell shell = Shell("sDisk.txt", 256, 128);
 	string s;
 	string command = "go";
 	string op1, op2;
@@ -66,32 +62,26 @@ int main()
 		}
 		if (command == "dir")
 		{
-			// use the ls function
 			shell.dir();
 		}
 		if (command == "search")
 		{
-			// The variable op1 is the date
 			table.search(op1);
 		}
 		if (command == "add")
 		{
-			// The variable op1 is the new file
 		    shell.add(op1);
 		}
 		if (command == "del")
 		{
-			// The variable op1 is the file
 			shell.del(op1);
 		}
 		if (command == "type")
 		{
-			// The variable op1 is the file
 			shell.type(op1);
 		}
 		if (command == "copy")
 		{
-			// The variable op1 is the source file and the variable op2 is the destination file.
 			shell.copy(op1, op2);
 		}
 	}

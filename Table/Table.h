@@ -44,7 +44,6 @@ private:
 	int indexSearch(string value);
 
 public:
-	//Table(string diskName, int numberOfBlocks, int blockSize, string flatFile, string indexFile);
 	Table(string diskName, int numberOfBlocks, int blockSize);
 	int buildTable(string inputFile);
 	int search(string value);

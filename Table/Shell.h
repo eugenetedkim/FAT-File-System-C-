@@ -25,11 +25,11 @@ class Shell: public FileSys
 {
 public:
     Shell(string fileName, int blockSize, int numberOfBlocks);
-    int dir(); // lists all files
-    int add(string file); // add a new file using input from the keyboard
-    int del(string file); // deletes the files
-    int type(string file); // lists the content of file
-    int copy(string file1, string file2); // copies file1 to file2
+    int dir();
+    int add(string file);
+    int del(string file);
+    int type(string file);
+    int copy(string file1, string file2);
 };
 
 #endif
