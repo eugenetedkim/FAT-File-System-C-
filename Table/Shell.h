@@ -30,6 +30,9 @@ public:
     int del(string file);
     int type(string file);
     int copy(string file1, string file2);
+    int clobber(string file);
+private:
+	void clobber_helper(string file, int block);
 };
 
 #endif

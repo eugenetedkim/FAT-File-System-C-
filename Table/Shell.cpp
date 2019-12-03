@@ -129,3 +129,23 @@ int Shell::copy(string file1, string file2)
 
   return 1;
 }
+
+int Shell::clobber(string file)
+{
+  int iBlock = getFirstBlock(file);
+  clobber_helper(file, iBlock);
+  return 0;
+}
+
+void Shell::clobber_helper(string file, int block)
+{
+  if (nextBlock(file, block) != 0)
+  {
+    clobber_helper(file, nextBlock(file, block));
+    delBlock(file, block);
+  }
+  else
+  {
+    delBlock(file, block);
+  }
+}

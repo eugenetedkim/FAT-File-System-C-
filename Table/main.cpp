@@ -84,6 +84,10 @@ int main()
 		{
 			shell.copy(op1, op2);
 		}
+		if (command == "clobber")
+		{
+			shell.clobber(op1);
+		}
 	}
 	return 0;
 }
